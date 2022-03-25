@@ -114,5 +114,8 @@
   "bugs": {
     "url": "https://github.com/bubkoo/html-to-image/issues"
   },
+  "resolutions": {
+    "canvas": "2.9.1"
+  },
   "homepage": "https://github.com/bubkoo/html-to-image#readme"
 }
