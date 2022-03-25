@@ -121,6 +121,10 @@ async function getCSSRules(
   const ret: CSSStyleRule[] = []
   const deferreds: Promise<number | void>[] = []
 
+  console.error(
+    '******************** THIS IS THE NEW CODE *******************************',
+  )
+
   // First loop inlines imports
   styleSheets.forEach((sheet) => {
     if ('cssRules' in sheet) {
