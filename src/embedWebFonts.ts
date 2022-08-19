@@ -124,8 +124,9 @@ async function getCSSRules(
   // First loop inlines imports
   styleSheets.forEach((sheet) => {
     if ('cssRules' in sheet) {
+      if (!Object.prototype.hasOwnProperty.call(sheet, 'cssRules')) return
       try {
-        toArray<CSSRule>(sheet.hasOwnProperty('cssRules')).forEach(
+        toArray<CSSRule>(sheet.cssRules).forEach(
           (item: CSSRule, index: number) => {
             if (item.type === CSSRule.IMPORT_RULE) {
               let importIndex = index + 1
@@ -141,7 +142,7 @@ async function getCSSRules(
                         rule,
                         rule.startsWith('@import')
                           ? (importIndex += 1)
-                          : sheet.hasOwnProperty('cssRules').length,
+                          : sheet.cssRules.length,
                       )
                     } catch (error) {
                       console.error('Error inserting rule from remote css', {
@@ -170,7 +171,7 @@ async function getCSSRules(
               )
               .then((cssText) =>
                 parseCSS(cssText).forEach((rule) => {
-                  inline.insertRule(rule, sheet.hasOwnProperty('cssRules').length)
+                  inline.insertRule(rule, sheet.cssRules.length)
                 }),
               )
               .catch((err) => {
@@ -187,8 +188,9 @@ async function getCSSRules(
     // Second loop parses rules
     styleSheets.forEach((sheet) => {
       if ('cssRules' in sheet) {
+        if (!Object.prototype.hasOwnProperty.call(sheet, 'cssRules')) return
         try {
-          toArray<CSSStyleRule>(sheet.hasOwnProperty('cssRules')).forEach(
+          toArray<CSSStyleRule>(sheet.cssRules).forEach(
             (item: CSSStyleRule) => {
               ret.push(item)
             },
